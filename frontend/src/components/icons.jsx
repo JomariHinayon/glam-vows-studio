@@ -1,3 +1,5 @@
+import { useId } from "react";
+
 // Inline SVG icons drawn to match the Figma design
 
 const base = {
@@ -111,3 +113,67 @@ export const SocialIcon = ({ name, ...p }) => {
       return null;
   }
 };
+
+// --- About page value icons ---
+export const ValueIcon = ({ name, ...p }) => {
+  const props = { ...base, width: 34, height: 34, strokeWidth: 1.3, ...p };
+  switch (name) {
+    case "laptop":
+      return (
+        <svg {...props}>
+          <rect x="4" y="5" width="16" height="11" rx="1.2" />
+          <path d="M2 19h20" />
+        </svg>
+      );
+    case "sparkle":
+      return (
+        <svg {...props}>
+          <path d="M12 2.5c.6 4.6 2.4 6.9 7 8.3v.4c-4.6 1.4-6.4 3.7-7 8.3h-.1c-.6-4.6-2.4-6.9-7-8.3v-.4c4.6-1.4 6.4-3.7 7-8.3z" />
+        </svg>
+      );
+    case "phone":
+      return (
+        <svg {...props}>
+          <rect x="7" y="2.5" width="10" height="19" rx="2" />
+          <path d="M11 18.5h2" />
+        </svg>
+      );
+    case "diamond":
+      return (
+        <svg {...props}>
+          <path d="M6.5 4h11L21 9l-9 11L3 9z" />
+          <path d="M3 9h18M9.5 4L8 9l4 11 4-11-1.5-5" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+};
+
+// --- Rating star (fill: 1 full, 0.5 half, 0 empty) ---
+export const Star = ({ fill = 1, ...p }) => {
+  const id = `star-${useId().replace(/:/g, "")}`;
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" {...p}>
+      <defs>
+        <linearGradient id={id}>
+          <stop offset={`${fill * 100}%`} stopColor="#f5b70a" />
+          <stop offset={`${fill * 100}%`} stopColor="transparent" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"
+        fill={`url(#${id})`}
+        stroke="#f5b70a"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const GoogleIcon = (p) => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" {...p}>
+    <path d="M21.6 10.2H12v3.9h5.5c-.5 2.6-2.7 4.1-5.5 4.1a6.2 6.2 0 1 1 0-12.4c1.5 0 2.9.5 4 1.4l2.9-2.9A10.2 10.2 0 1 0 12 22.2c5.1 0 9.8-3.7 9.8-10.2 0-.6-.1-1.2-.2-1.8z" />
+  </svg>
+);

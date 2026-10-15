@@ -1,7 +1,7 @@
-export default function Why({ data }) {
+export default function Why({ data, band = true, className = "" }) {
   return (
     <>
-      <section id="about" className="section why">
+      <section id="about" className={`section why ${className}`}>
         <div className="container why__inner">
           <p className="eyebrow why__eyebrow">{data.why_eyebrow}</p>
           {data.why_paragraphs.map((p, i) => (
@@ -11,7 +11,7 @@ export default function Why({ data }) {
           ))}
         </div>
       </section>
-      <div className="divider-band" />
+      {band && <div className="divider-band" />}
     </>
   );
 }

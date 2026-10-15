@@ -141,7 +141,8 @@
 .cart-panel {
   pointer-events: auto;
   margin-top: 8px;
-  width: 300px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
   padding: 24px;
   background: var(--cream);
   color: var(--ink);
@@ -309,6 +310,7 @@
   gap: 27px;
 }
 .collection-card {
+  display: block;
   margin: 0;
 }
 .collection-card__media {
@@ -332,7 +334,7 @@
   font-size: 32px;
   line-height: 1.5;
   text-align: center;
-  margin-top: 34px;
+  margin: 34px 0 0;
   color: var(--ink);
 }
 .collections__controls {
@@ -518,7 +520,7 @@
 }
 .final-cta__content {
   position: relative;
-  max-width: 1100px;
+  max-width: 1202px; /* 1074px text box + side padding, as in Figma */
   margin: 0 auto;
 }
 .final-cta__content .eyebrow {

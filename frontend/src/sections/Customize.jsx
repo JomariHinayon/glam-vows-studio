@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import RichText from "../components/RichText";
 import { Check } from "../components/icons";
 
@@ -19,9 +20,9 @@ export default function Customize({ data }) {
           ))}
         </ul>
 
-        <button className="btn btn--solid customize__cta">
+        <Link to="/collection" className="btn btn--solid customize__cta">
           {data.customize_cta_label}
-        </button>
+        </Link>
       </div>
     </section>
   );

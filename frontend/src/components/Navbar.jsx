@@ -1,33 +1,65 @@
 import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import site from "../data/site";
+import { useCart } from "../context/CartContext";
+import CartPanel from "./CartPanel";
 import { UserIcon, SearchIcon, BagIcon, ChevronDown, MenuIcon, CloseIcon } from "./icons";
 
-// "#cart" opens the cart panel instead of jumping to a section
+// "#cart" opens the cart panel instead of navigating
 const CART_URL = "#cart";
 
-export default function Navbar({ data, overlay = true }) {
+// Pages use <Link>; "#..." links stay plain anchors on the current page
+function NavLink({ url, ...props }) {
+  return url.startsWith("/") ? <Link to={url} {...props} /> : <a href={url} {...props} />;
+}
+
+/**
+ * variant: "overlay" (white, over a hero photo) | "solid" (cream bar) |
+ *          "auth" (logo + log-in/sign-up prompt, as on the Figma Login page)
+ */
+export default function Navbar({ variant = "overlay" }) {
   const [openMenu, setOpenMenu] = useState(null); // label of the open dropdown
-  const [cartOpen, setCartOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const cart = useCart();
   const headerRef = useRef(null);
+  const location = useLocation();
 
   const closeAll = () => {
     setOpenMenu(null);
-    setCartOpen(false);
+    cart.setOpen(false);
     setMobileOpen(false);
   };
+
+  // Close menus when the page changes
+  useEffect(() => {
+    setOpenMenu(null);
+    setMobileOpen(false);
+  }, [location.pathname, location.search]);
 
   // Close menus on outside click or Escape
   useEffect(() => {
     const onClick = (e) => {
-      if (headerRef.current && !headerRef.current.contains(e.target)) closeAll();
+      if (headerRef.current && !headerRef.current.contains(e.target)) {
+        setOpenMenu(null);
+        setMobileOpen(false);
+        cart.setOpen(false);
+      }
     };
-    const onKey = (e) => e.key === "Escape" && closeAll();
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setOpenMenu(null);
+        setMobileOpen(false);
+        cart.setOpen(false);
+      }
+    };
     document.addEventListener("mousedown", onClick);
     document.addEventListener("keydown", onKey);
     return () => {
       document.removeEventListener("mousedown", onClick);
       document.removeEventListener("keydown", onKey);
     };
+    // cart.setOpen is a stable state setter
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLink = (e, url) => {
@@ -35,7 +67,7 @@ export default function Navbar({ data, overlay = true }) {
       e.preventDefault();
       setOpenMenu(null);
       setMobileOpen(false);
-      setCartOpen((o) => !o);
+      cart.setOpen(!cart.isOpen);
       return;
     }
     closeAll();
@@ -45,19 +77,38 @@ export default function Navbar({ data, overlay = true }) {
   // would close it again). It closes on leave, Escape, outside click or a pick.
   const openDropdown = (e, label) => {
     e.preventDefault();
-    setCartOpen(false);
+    cart.setOpen(false);
     setOpenMenu(label);
   };
 
+  const logo = (
+    <Link className="navbar__logo" to="/" onClick={closeAll}>
+      {site.logo_text} <em>{site.logo_accent}</em>
+    </Link>
+  );
+
+  if (variant === "auth") {
+    const onLogin = location.pathname === "/login";
+    return (
+      <header className="navbar navbar--solid">
+        <div className="container navbar__inner navbar__inner--auth">
+          {logo}
+          <p className="navbar__auth">
+            {onLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+            <Link to={onLogin ? "/signup" : "/login"}>{onLogin ? "Sign Up" : "Log In"}</Link>
+          </p>
+        </div>
+      </header>
+    );
+  }
+
   return (
-    <header ref={headerRef} className={`navbar ${overlay ? "navbar--overlay" : ""}`}>
+    <header ref={headerRef} className={`navbar navbar--${variant}`}>
       <div className="container navbar__inner">
-        <a className="navbar__logo" href="#top" onClick={closeAll}>
-          {data.logo_text} <em>{data.logo_accent}</em>
-        </a>
+        {logo}
 
         <nav className="navbar__links" aria-label="Main">
-          {data.nav_links.map((link) =>
+          {site.nav_links.map((link) =>
             link.has_dropdown && link.children.length ? (
               <div
                 key={link.label}
@@ -80,52 +131,54 @@ export default function Navbar({ data, overlay = true }) {
                 {openMenu === link.label && (
                   <div className="nav-menu" role="menu">
                     {link.children.map((child) => (
-                      <a
+                      <NavLink
                         key={child.label}
-                        href={child.url}
+                        url={child.url}
                         role="menuitem"
                         className="nav-menu__item"
                         onClick={closeAll}
                       >
                         {child.label}
-                      </a>
+                      </NavLink>
                     ))}
                   </div>
                 )}
               </div>
             ) : (
-              <a
+              <NavLink
                 key={link.label}
-                href={link.url}
+                url={link.url}
                 className="navbar__link"
                 onClick={(e) => handleLink(e, link.url)}
               >
                 {link.label}
-              </a>
+              </NavLink>
             )
           )}
         </nav>
 
         <div className="navbar__icons">
-          <a href="#contact" aria-label="Account" onClick={closeAll}>
+          <Link to="/signup" aria-label="Account" onClick={closeAll}>
             <UserIcon />
-          </a>
-          <a href="#collections" aria-label="Search collections" onClick={closeAll}>
+          </Link>
+          <Link to="/collection" aria-label="Browse collections" onClick={closeAll}>
             <SearchIcon />
-          </a>
+          </Link>
           <button
-            aria-label="Cart"
-            aria-expanded={cartOpen}
+            className="navbar__bag"
+            aria-label={`Cart, ${cart.count} item${cart.count === 1 ? "" : "s"}`}
+            aria-expanded={cart.isOpen}
             onClick={(e) => handleLink(e, CART_URL)}
           >
             <BagIcon />
+            {cart.count > 0 && <span className="navbar__badge">{cart.count}</span>}
           </button>
           <button
             className="navbar__burger"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             onClick={() => {
-              setCartOpen(false);
+              cart.setOpen(false);
               setMobileOpen((o) => !o);
             }}
           >
@@ -134,38 +187,28 @@ export default function Navbar({ data, overlay = true }) {
         </div>
       </div>
 
-      {cartOpen && (
-        <div className="container cart-panel-wrap">
-          <div className="cart-panel" role="dialog" aria-label="Cart">
-            <p className="cart-panel__title">Your cart</p>
-            <p className="cart-panel__empty">Your cart is empty.</p>
-            <a href="#collections" className="btn btn--solid" onClick={closeAll}>
-              Browse collections
-            </a>
-          </div>
-        </div>
-      )}
+      {cart.isOpen && <CartPanel onNavigate={closeAll} />}
 
       {mobileOpen && (
         <nav className="mobile-menu" aria-label="Mobile">
-          {data.nav_links.map((link) => (
+          {site.nav_links.map((link) => (
             <div key={link.label} className="mobile-menu__group">
-              <a
-                href={link.url}
+              <NavLink
+                url={link.url}
                 className="mobile-menu__link"
                 onClick={(e) => handleLink(e, link.url)}
               >
                 {link.label}
-              </a>
+              </NavLink>
               {link.children.map((child) => (
-                <a
+                <NavLink
                   key={child.label}
-                  href={child.url}
+                  url={child.url}
                   className="mobile-menu__sub"
                   onClick={closeAll}
                 >
                   {child.label}
-                </a>
+                </NavLink>
               ))}
             </div>
           ))}

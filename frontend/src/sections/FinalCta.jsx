@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import RichText from "../components/RichText";
 
 export default function FinalCta({ data }) {
@@ -12,8 +13,12 @@ export default function FinalCta({ data }) {
           <RichText as="h2" className="display final-cta__title" text={data.final_heading} />
           <p className="lead final-cta__sub">{data.final_subtitle}</p>
           <div className="final-cta__buttons">
-            <button className="btn btn--solid">{data.final_primary_cta}</button>
-            <a href="#chapters" className="btn btn--ghost">{data.final_secondary_cta}</a>
+            <Link to="/collection" className="btn btn--solid">
+              {data.final_primary_cta}
+            </Link>
+            <Link to="/#chapters" className="btn btn--ghost">
+              {data.final_secondary_cta}
+            </Link>
           </div>
         </div>
       </div>

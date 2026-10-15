@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import RichText from "../components/RichText";
 import { ArrowLeft, ArrowRight } from "../components/icons";
 
@@ -16,13 +17,13 @@ export default function Collections({ data }) {
         </div>
 
         <div className="collections__grid">
-          {items.map((item, i) => (
-            <figure key={item.title} className="collection-card">
+          {items.map((item) => (
+            <Link key={item.title} to={item.link} className="collection-card">
               <div className="collection-card__media">
                 <img src={item.image} alt={item.title} />
               </div>
-              <figcaption className="collection-card__title">{item.title}</figcaption>
-            </figure>
+              <p className="collection-card__title">{item.title}</p>
+            </Link>
           ))}
         </div>
 
@@ -55,7 +56,9 @@ export default function Collections({ data }) {
         </div>
 
         <div className="collections__cta">
-          <button className="btn btn--solid">{data.collections_cta_label}</button>
+          <Link to="/collection" className="btn btn--solid">
+            {data.collections_cta_label}
+          </Link>
         </div>
       </div>
     </section>

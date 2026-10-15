@@ -5,6 +5,8 @@
  * Same shape as the backend's /api/homepage/ response, so switching back is
  * just re-enabling the fetch in App.jsx.
  *
+ * Collection cards link to the collection page (see `link`).
+ *
  * Text wrapped in *asterisks* renders as italic (see components/RichText.jsx).
  */
 
@@ -13,32 +15,11 @@ import laptopImg from "../assets/images/hero.jpg";
 import tabletImg from "../assets/images/collection-2.jpg";
 import stationeryImg from "../assets/images/collection-3.jpg";
 import paperTexture from "../assets/images/cta-texture.jpg";
+import site from "./site";
 
 const homepage = {
-  // --- Brand ---
-  logo_text: "GLAM VOWS",
-  logo_accent: "STUDIO",
-
-  // --- Navbar (links jump to sections of the page) ---
-  nav_links: [
-    { label: "HOME", url: "#top", has_dropdown: false, children: [] },
-    {
-      label: "SHOP",
-      url: "#collections",
-      has_dropdown: true,
-      children: [
-        { label: "All Templates", url: "#collections" },
-        { label: "Wedding Websites", url: "#collections" },
-        { label: "Save the Date", url: "#collections" },
-        { label: "Invitation Suites", url: "#collections" },
-        { label: "Signage and Stationery", url: "#collections" },
-        { label: "Bundles", url: "#collections" },
-      ],
-    },
-    { label: "CART", url: "#cart", has_dropdown: false, children: [] },
-    { label: "ABOUT", url: "#about", has_dropdown: false, children: [] },
-    { label: "CONTACT", url: "#contact", has_dropdown: false, children: [] },
-  ],
+  // Logo, navbar and footer are shared by every page
+  ...site,
 
   // --- Hero ---
   hero_eyebrow: "WEDDING WEBSITES & DIGITAL INVITATIONS",
@@ -62,9 +43,9 @@ const homepage = {
   collections_subtitle: "Discover our collections and find the one that fits your story.",
   collections_cta_label: "View the full collection",
   collection_items: [
-    { title: "Wedding Websites", image: laptopImg },
-    { title: "Invitation Suites", image: tabletImg },
-    { title: "Signage & Stationery", image: stationeryImg },
+    { title: "Wedding Websites", image: laptopImg, link: "/collection?category=wedding-websites" },
+    { title: "Invitation Suites", image: tabletImg, link: "/collection?category=invitation-suites" },
+    { title: "Signage & Stationery", image: stationeryImg, link: "/collection?category=signage-stationery" },
   ],
 
   // --- Five Chapters (numerals as shown in the Figma design) ---
@@ -107,23 +88,6 @@ const homepage = {
   final_primary_cta: "Begin your story",
   final_secondary_cta: "Explore chapters",
   final_bg_image: paperTexture,
-
-  // --- Footer ---
-  footer_copyright: "© 2026 GLAM VOWS STUDIO",
-  footer_tagline: "WEDDING WEBSITES & DIGITAL INVITATIONS",
-  footer_links: [
-    { label: "The Site", url: "#top" },
-    { label: "Shop", url: "#collections" },
-    { label: "About", url: "#about" },
-    { label: "Contact", url: "#contact" },
-    { label: "Account", url: "#top" },
-  ],
-  social_links: [
-    { icon: "facebook", url: "#" },
-    { icon: "instagram", url: "#" },
-    { icon: "linkedin", url: "#" },
-    { icon: "youtube", url: "#" },
-  ],
 };
 
 export default homepage;

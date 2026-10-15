@@ -80,6 +80,25 @@ npm run dev
 
 Open **http://localhost:5173** — run both servers together.
 
+## Pages
+
+The frontend currently runs on its own (the Django API is switched off; see `frontend/src/App.jsx`).
+All content lives in `frontend/src/data/`.
+
+| URL                    | Page                          | Content file                 |
+|------------------------|-------------------------------|------------------------------|
+| `/`                    | Home                          | `data/homepage.js`           |
+| `/about`               | About                         | `data/about.js`              |
+| `/collection`          | Collection (with filter tabs) | `data/products.js`           |
+| `/collection/:slug`    | Product page                  | `data/products.js`           |
+| `/signup`, `/login`    | Sign up / log in              | `pages/AuthPage.jsx`         |
+
+Logo, navbar and footer links are in `data/site.js`. The cart is saved in the
+browser. There's no payment or account backend yet: Checkout and Buy Now lead to
+the sign-up page, and the sign-up form shows an "accounts coming soon" notice.
+
+`frontend/vercel.json` makes direct links like `/about` work on Vercel.
+
 ## Fonts
 
 The Figma design uses two commercial fonts:
