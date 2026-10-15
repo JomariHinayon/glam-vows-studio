@@ -6,10 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    proxy: {
-      // Proxy API + media calls to the Django dev server
-      '/api': 'http://localhost:8000',
-      '/media': 'http://localhost:8000',
-    },
+    // Backend disabled for now — content lives in src/data/homepage.js.
+    // Re-enable to proxy API + media calls to the Django dev server.
+    // proxy: {
+    //   '/api': 'http://localhost:8000',
+    //   '/media': 'http://localhost:8000',
+    // },
   },
 })

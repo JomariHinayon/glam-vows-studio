@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
-import { fetchHomepage } from "./api";
+// Backend disabled for now — content lives in src/data/homepage.js.
+// To switch back to the Django API, restore the commented code below.
+// import { useEffect, useState } from "react";
+// import { fetchHomepage } from "./api";
+import homepage from "./data/homepage";
 import "./styles/sections.css";
 
 import Navbar from "./components/Navbar";
@@ -13,15 +16,18 @@ import Customize from "./sections/Customize";
 import FinalCta from "./sections/FinalCta";
 
 export default function App() {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+  const data = homepage;
 
-  useEffect(() => {
-    fetchHomepage().then(setData).catch((e) => setError(e.message));
-  }, []);
-
-  if (error) return <div className="state">Couldn’t load the page — {error}</div>;
-  if (!data) return <div className="state">Loading…</div>;
+  // --- Backend (Django API) — disabled for now ---
+  // const [data, setData] = useState(null);
+  // const [error, setError] = useState(null);
+  //
+  // useEffect(() => {
+  //   fetchHomepage().then(setData).catch((e) => setError(e.message));
+  // }, []);
+  //
+  // if (error) return <div className="state">Couldn’t load the page — {error}</div>;
+  // if (!data) return <div className="state">Loading…</div>;
 
   return (
     <>
