@@ -18,9 +18,9 @@ export default function Navbar({ data, overlay = true }) {
         </nav>
 
         <div className="navbar__icons">
-          <UserIcon />
-          <SearchIcon />
-          <BagIcon />
+          <button aria-label="Account"><UserIcon /></button>
+          <button aria-label="Search"><SearchIcon /></button>
+          <button aria-label="Cart"><BagIcon /></button>
         </div>
       </div>
     </header>

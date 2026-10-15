@@ -1,11 +1,12 @@
 import { SocialIcon } from "./icons";
+import monogram from "../assets/monogram.png";
 
 export default function Footer({ data }) {
   return (
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__brand">
-          <span className="footer__monogram">GVS</span>
+          <img className="footer__monogram" src={monogram} alt="Glam Vows Studio" />
           <p className="footer__copyright">{data.footer_copyright}</p>
           <p className="footer__tagline">{data.footer_tagline}</p>
         </div>
