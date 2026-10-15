@@ -18,6 +18,7 @@ from api.models import (
     FooterLink,
     HomePage,
     NavLink,
+    NavSubLink,
     SocialLink,
 )
 
@@ -97,19 +98,32 @@ class Command(BaseCommand):
         self._attach(home, "final_bg_image", "cta-texture.jpg")
         home.save()
 
-        # --- Navbar ---
+        # --- Navbar (links jump to sections of the homepage) ---
         home.nav_links.all().delete()
         nav = [
-            ("HOME", "#", False),
-            ("SHOP", "#", True),
-            ("CART", "#", False),
-            ("ABOUT", "#", False),
-            ("CONTACT", "#", False),
+            ("HOME", "#top", False),
+            ("SHOP", "#collections", True),
+            ("CART", "#cart", False),
+            ("ABOUT", "#about", False),
+            ("CONTACT", "#contact", False),
         ]
         for i, (label, url, dd) in enumerate(nav):
             NavLink.objects.create(
                 home=home, label=label, url=url, has_dropdown=dd, order=i
             )
+
+        # SHOP dropdown (items as in the Figma menu)
+        shop = home.nav_links.get(label="SHOP")
+        shop_menu = [
+            "All Templates",
+            "Wedding Websites",
+            "Save the Date",
+            "Invitation Suites",
+            "Signage and Stationery",
+            "Bundles",
+        ]
+        for i, label in enumerate(shop_menu):
+            NavSubLink.objects.create(parent=shop, label=label, url="#collections", order=i)
 
         # --- Collections ---
         home.collection_items.all().delete()
@@ -154,8 +168,15 @@ class Command(BaseCommand):
 
         # --- Footer links ---
         home.footer_links.all().delete()
-        for i, label in enumerate(["The Site", "Shop", "About", "Contact", "Account"]):
-            FooterLink.objects.create(home=home, label=label, url="#", order=i)
+        footer = [
+            ("The Site", "#top"),
+            ("Shop", "#collections"),
+            ("About", "#about"),
+            ("Contact", "#contact"),
+            ("Account", "#top"),
+        ]
+        for i, (label, url) in enumerate(footer):
+            FooterLink.objects.create(home=home, label=label, url=url, order=i)
 
         # --- Social links ---
         home.social_links.all().delete()

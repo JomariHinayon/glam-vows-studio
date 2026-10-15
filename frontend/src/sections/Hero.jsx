@@ -3,6 +3,7 @@ import RichText from "../components/RichText";
 export default function Hero({ data }) {
   return (
     <section
+      id="top"
       className="hero"
       style={{ backgroundImage: `url(${data.hero_image})` }}
     >

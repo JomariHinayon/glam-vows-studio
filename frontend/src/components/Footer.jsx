@@ -3,7 +3,7 @@ import monogram from "../assets/monogram.png";
 
 export default function Footer({ data }) {
   return (
-    <footer className="footer">
+    <footer id="contact" className="footer">
       <div className="container footer__inner">
         <div className="footer__brand">
           <img className="footer__monogram" src={monogram} alt="Glam Vows Studio" />

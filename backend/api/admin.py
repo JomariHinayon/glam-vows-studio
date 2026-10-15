@@ -7,6 +7,7 @@ from .models import (
     FooterLink,
     HomePage,
     NavLink,
+    NavSubLink,
     SocialLink,
 )
 
@@ -14,6 +15,19 @@ from .models import (
 class NavLinkInline(admin.TabularInline):
     model = NavLink
     extra = 0
+
+
+class NavSubLinkInline(admin.TabularInline):
+    model = NavSubLink
+    extra = 0
+
+
+@admin.register(NavLink)
+class NavLinkAdmin(admin.ModelAdmin):
+    """Edit a nav link's dropdown items (e.g. the SHOP menu)."""
+
+    list_display = ["label", "url", "has_dropdown", "order"]
+    inlines = [NavSubLinkInline]
 
 
 class CollectionItemInline(admin.TabularInline):

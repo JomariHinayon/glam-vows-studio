@@ -13,7 +13,7 @@ export default function FinalCta({ data }) {
           <p className="lead final-cta__sub">{data.final_subtitle}</p>
           <div className="final-cta__buttons">
             <button className="btn btn--solid">{data.final_primary_cta}</button>
-            <button className="btn btn--ghost">{data.final_secondary_cta}</button>
+            <a href="#chapters" className="btn btn--ghost">{data.final_secondary_cta}</a>
           </div>
         </div>
       </div>

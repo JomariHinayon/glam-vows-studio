@@ -2,7 +2,7 @@ import RichText from "../components/RichText";
 
 export default function Chapters({ data }) {
   return (
-    <section className="section chapters">
+    <section id="chapters" className="section chapters">
       <div className="container">
         <div className="chapters__head">
           <p className="eyebrow">{data.chapters_eyebrow}</p>

@@ -7,14 +7,23 @@ from .models import (
     FooterLink,
     HomePage,
     NavLink,
+    NavSubLink,
     SocialLink,
 )
 
 
+class NavSubLinkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NavSubLink
+        fields = ["label", "url"]
+
+
 class NavLinkSerializer(serializers.ModelSerializer):
+    children = NavSubLinkSerializer(many=True, read_only=True)
+
     class Meta:
         model = NavLink
-        fields = ["label", "url", "has_dropdown"]
+        fields = ["label", "url", "has_dropdown", "children"]
 
 
 class CollectionItemSerializer(serializers.ModelSerializer):

@@ -7,7 +7,7 @@ export default function Collections({ data }) {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="section collections">
+    <section id="collections" className="section collections">
       <div className="container">
         <div className="section-head">
           <p className="eyebrow">{data.collections_eyebrow}</p>

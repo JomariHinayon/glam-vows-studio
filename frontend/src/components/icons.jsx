@@ -41,6 +41,18 @@ export const ChevronDown = (p) => (
   </svg>
 );
 
+export const MenuIcon = (p) => (
+  <svg {...base} {...p}>
+    <path d="M3.5 7h17M3.5 12h17M3.5 17h17" />
+  </svg>
+);
+
+export const CloseIcon = (p) => (
+  <svg {...base} {...p}>
+    <path d="M5.5 5.5l13 13M18.5 5.5l-13 13" />
+  </svg>
+);
+
 export const ArrowLeft = (p) => (
   <svg {...base} width="20" height="20" strokeWidth="1.4" {...p}>
     <path d="M20 12H4" />

@@ -101,6 +101,21 @@ class NavLink(models.Model):
         return self.label
 
 
+class NavSubLink(models.Model):
+    """An item in a nav link's dropdown menu (e.g. SHOP > Wedding Websites)."""
+
+    parent = models.ForeignKey(NavLink, related_name="children", on_delete=models.CASCADE)
+    label = models.CharField(max_length=80)
+    url = models.CharField(max_length=200, default="#")
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order"]
+
+    def __str__(self):
+        return self.label
+
+
 class CollectionItem(models.Model):
     home = models.ForeignKey(
         HomePage, related_name="collection_items", on_delete=models.CASCADE

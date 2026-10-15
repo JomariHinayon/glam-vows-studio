@@ -1,7 +1,7 @@
 export default function Why({ data }) {
   return (
     <>
-      <section className="section why">
+      <section id="about" className="section why">
         <div className="container why__inner">
           <p className="eyebrow why__eyebrow">{data.why_eyebrow}</p>
           {data.why_paragraphs.map((p, i) => (

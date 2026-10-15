@@ -56,13 +56,142 @@
   justify-content: flex-end;
   align-items: center;
 }
-.navbar__icons button {
+.navbar__icons button,
+.navbar__icons a {
   background: none;
   border: 0;
   padding: 0;
   color: inherit;
   cursor: pointer;
   display: grid;
+  transition: opacity 0.2s;
+}
+.navbar__icons button:hover,
+.navbar__icons a:hover {
+  opacity: 0.7;
+}
+.navbar__burger {
+  display: none !important;
+}
+.navbar__chev {
+  transition: transform 0.2s;
+}
+.navbar__chev--up {
+  transform: rotate(180deg);
+}
+
+/* SHOP dropdown — Figma "Menu": 193px, cream 80% + blur, soft shadow */
+.navbar__dropdown {
+  position: relative;
+  display: flex;
+}
+.nav-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  min-width: 193px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(252, 251, 248, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.14);
+  animation: menu-in 0.18s ease;
+}
+/* keeps the menu open while the pointer crosses the gap */
+.nav-menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10px;
+  height: 10px;
+}
+.nav-menu__item {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #41403d;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.nav-menu__item:hover,
+.nav-menu__item:focus-visible {
+  color: var(--numeral);
+}
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* Cart panel */
+.cart-panel-wrap {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+.cart-panel {
+  pointer-events: auto;
+  margin-top: 8px;
+  width: 300px;
+  padding: 24px;
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.14);
+  animation: menu-in 0.18s ease;
+}
+.cart-panel__title {
+  font-family: var(--serif);
+  font-stretch: var(--serif-wdth);
+  font-weight: var(--extralight);
+  font-size: 28px;
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+.cart-panel__empty {
+  font-size: 16px;
+  margin: 0 0 20px;
+}
+.cart-panel .btn {
+  width: 100%;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--cream);
+  color: var(--ink);
+  padding: 8px var(--gutter) 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.14);
+  max-height: calc(100vh - 66px);
+  overflow-y: auto;
+  animation: menu-in 0.18s ease;
+}
+.mobile-menu__group {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+}
+.mobile-menu__link {
+  font-size: 15px;
+  letter-spacing: 0.06em;
+}
+.mobile-menu__sub {
+  font-size: 15px;
+  color: #41403d;
+  padding: 10px 0 0 14px;
 }
 
 /* ============================================================= HERO */
@@ -534,6 +663,9 @@
   }
   .navbar__inner {
     grid-template-columns: 1fr auto;
+  }
+  .navbar__burger {
+    display: grid !important;
   }
 }
 
