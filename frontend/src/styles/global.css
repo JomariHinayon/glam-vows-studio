@@ -11,10 +11,13 @@
   --btn: #000000;
   --btn-text: #ffffff;
 
-  /* Condensed hairline serif + tight grotesk */
-  --serif: "Noto Serif Display", Georgia, "Times New Roman", serif;
-  --serif-wdth: 80%;
-  --sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  /* Design fonts first (see fonts.css), then size-matched fallbacks */
+  --serif: "Editor's Note", "Display Serif Fallback", Georgia, serif;
+  --serif-wdth: 80%; /* only affects the condensed fallback */
+  --sans: "Neue Haas Grotesk Display Pro", "Grotesk Fallback", "Helvetica Neue", Arial, sans-serif;
+  /* Editor's Note weights (mapped in fonts.css) */
+  --extralight: 300;
+  --light: 350;
 
   /* Figma frame is 1440 wide with 64px side padding */
   --maxw: 1440px;
@@ -36,8 +39,7 @@ body {
   font-family: var(--sans);
   font-weight: 400;
   font-size: 17px;
-  line-height: 1.6;
-  letter-spacing: -0.015em;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -65,10 +67,10 @@ em {
 /* Shared type helpers */
 .eyebrow {
   font-family: var(--sans);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
   letter-spacing: 0.12em;
-  line-height: 1.4;
+  line-height: 1.5;
   text-transform: uppercase;
   color: var(--ink);
   margin: 0;
@@ -76,22 +78,20 @@ em {
 
 .display {
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: var(--extralight);
   font-stretch: var(--serif-wdth);
   color: var(--ink);
   line-height: 1.2;
-  letter-spacing: -0.01em;
   margin: 0;
 }
 .display em {
-  font-weight: 300;
+  font-weight: var(--extralight);
 }
 
 .lead {
   color: var(--body);
   font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: -0.02em;
+  line-height: 1.5;
 }
 
 /* Buttons */
@@ -100,9 +100,9 @@ em {
   align-items: center;
   justify-content: center;
   font-family: var(--sans);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
-  letter-spacing: -0.01em;
+  line-height: 1.5;
   height: 48px;
   padding: 0 28px;
   cursor: pointer;

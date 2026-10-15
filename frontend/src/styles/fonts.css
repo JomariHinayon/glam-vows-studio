@@ -1,0 +1,91 @@
+/*
+ * Design typefaces (from the Figma file):
+ *   - Editor's Note (Extralight / Light, + italics) ............ headings, logo
+ *   - Neue Haas Grotesk Display Pro 55 Roman ................... body, nav, buttons
+ *
+ * Both are commercial fonts. They load from the user's machine (local) or from
+ * licensed files dropped into frontend/public/fonts/ (see README there).
+ * Until then, the size-adjusted fallbacks below keep the layout matching.
+ *
+ * Weights are mapped so the variable fallback renders a similar stroke:
+ *   Extralight -> 300, Light -> 350.
+ */
+
+@font-face {
+  font-family: "Editor's Note";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local("Editor's Note Extralight"), local("EditorsNote-Extralight"),
+    url("/fonts/EditorsNote-Extralight.woff2") format("woff2"),
+    url("/fonts/EditorsNote-Extralight.otf") format("opentype");
+}
+@font-face {
+  font-family: "Editor's Note";
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: local("Editor's Note Extralight Italic"), local("EditorsNote-ExtralightItalic"),
+    url("/fonts/EditorsNote-ExtralightItalic.woff2") format("woff2"),
+    url("/fonts/EditorsNote-ExtralightItalic.otf") format("opentype");
+}
+@font-face {
+  font-family: "Editor's Note";
+  font-style: normal;
+  font-weight: 350;
+  font-display: swap;
+  src: local("Editor's Note Light"), local("EditorsNote-Light"),
+    url("/fonts/EditorsNote-Light.woff2") format("woff2"),
+    url("/fonts/EditorsNote-Light.otf") format("opentype");
+}
+@font-face {
+  font-family: "Editor's Note";
+  font-style: italic;
+  font-weight: 350;
+  font-display: swap;
+  src: local("Editor's Note Light Italic"), local("EditorsNote-LightItalic"),
+    url("/fonts/EditorsNote-LightItalic.woff2") format("woff2"),
+    url("/fonts/EditorsNote-LightItalic.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Neue Haas Grotesk Display Pro 55 Roman"), local("NeueHaasDisplay-Roman"),
+    local("NHaasGroteskDSPro-55Rg"),
+    url("/fonts/NeueHaasDisplay-Roman.woff2") format("woff2"),
+    url("/fonts/NeueHaasDisplay-Roman.otf") format("opentype");
+}
+
+/* Fallbacks: closest open fonts, scaled to the design fonts' widths */
+@font-face {
+  font-family: "Display Serif Fallback";
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 62.5% 100%;
+  font-display: swap;
+  size-adjust: 91%;
+  src: url("@fontsource-variable/noto-serif-display/files/noto-serif-display-latin-standard-normal.woff2")
+    format("woff2-variations");
+}
+@font-face {
+  font-family: "Display Serif Fallback";
+  font-style: italic;
+  font-weight: 100 900;
+  font-stretch: 62.5% 100%;
+  font-display: swap;
+  size-adjust: 91%;
+  src: url("@fontsource-variable/noto-serif-display/files/noto-serif-display-latin-standard-italic.woff2")
+    format("woff2-variations");
+}
+@font-face {
+  font-family: "Grotesk Fallback";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  size-adjust: 93%;
+  src: url("@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2")
+    format("woff2-variations");
+}

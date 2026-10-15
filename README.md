@@ -16,7 +16,7 @@ the Django admin without touching code.
 | Backend   | Python · Django 5 · Django REST Framework · Pillow          |
 | Database  | SQLite                                                       |
 | Frontend  | React 19 · Vite · React Router · Axios                       |
-| Fonts     | Noto Serif Display, condensed (display) · Inter Tight (body) |
+| Fonts     | Editor's Note (display) · Neue Haas Grotesk Display Pro (body) |
 
 ## Features
 
@@ -82,11 +82,15 @@ Open **http://localhost:5173** — run both servers together.
 
 ## Fonts
 
-The Figma file uses a custom condensed hairline serif and a tight grotesk. The
-closest Google Fonts are used, loaded in `frontend/index.html`:
+The Figma design uses two commercial fonts:
 
-- **Noto Serif Display** at `font-stretch: 80%`, weight 300 — headings, logo, card titles
-- **Inter Tight** — body copy, nav, buttons
+- **Editor's Note** (Extralight, Light + italics) for headings, logo and card titles
+- **Neue Haas Grotesk Display Pro 55 Roman** for body, nav and buttons
+
+They're wired up in `frontend/src/styles/fonts.css`. Put the licensed files in
+`frontend/public/fonts/` (file names listed in the README there) and they load
+automatically. Until then, size-matched open fallbacks are used: Noto Serif Display
+(condensed) and Inter Tight.
 
 Italic emphasis in headings is stored in the DB with `*asterisks*` and rendered as
 `<em>` by `components/RichText.jsx`.

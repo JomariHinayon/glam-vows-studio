@@ -36,7 +36,7 @@ class Command(BaseCommand):
 
         # --- Hero ---
         home.hero_eyebrow = "WEDDING WEBSITES & DIGITAL INVITATIONS"
-        home.hero_heading = "Every love story deserves a beautiful *prologue.*"
+        home.hero_heading = "Every love story deserves\na beautiful *prologue.*"
         home.hero_subtitle = (
             "Glam Vows Studio designs the first chapter of your wedding journey, "
             "a website as personal, elegant, and timeless as the day it's leading to."
