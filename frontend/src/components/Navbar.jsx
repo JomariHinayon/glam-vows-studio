@@ -90,7 +90,7 @@ export default function Navbar({ variant = "overlay" }) {
   if (variant === "auth") {
     const onLogin = location.pathname === "/login";
     return (
-      <header className="navbar navbar--solid">
+      <header className="navbar navbar--solid" data-reveal="fade">
         <div className="container navbar__inner navbar__inner--auth">
           {logo}
           <p className="navbar__auth">
@@ -103,7 +103,7 @@ export default function Navbar({ variant = "overlay" }) {
   }
 
   return (
-    <header ref={headerRef} className={`navbar navbar--${variant}`}>
+    <header ref={headerRef} className={`navbar navbar--${variant}`} data-reveal="fade">
       <div className="container navbar__inner">
         {logo}
 

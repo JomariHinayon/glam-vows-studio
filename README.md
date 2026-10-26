@@ -99,6 +99,11 @@ the sign-up page, and the sign-up form shows an "accounts coming soon" notice.
 
 `frontend/vercel.json` makes direct links like `/about` work on Vercel.
 
+## Design references
+
+- **Layout, copy, fonts, sizes:** the Figma file. It is the source of truth for how each page looks.
+- **Animation and motion:** [Studio Blanche](https://www.blanchestudio.co.uk/), a branding and web design studio for beauty, wellness and skincare businesses. Copy how its pages move (scroll reveals, transitions, hover effects), not its layout or content.
+
 ## Fonts
 
 The Figma design uses two commercial fonts:

@@ -9,6 +9,7 @@ import "./styles/pages.css";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Motion from "./components/Motion";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import CollectionPage from "./pages/CollectionPage";
@@ -55,6 +56,7 @@ export default function App() {
   return (
     <>
       <ScrollManager />
+      <Motion />
       <Navbar variant={variant} />
       <main>
         <Routes>

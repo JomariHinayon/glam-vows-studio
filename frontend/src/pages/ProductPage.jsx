@@ -74,7 +74,7 @@ function Product({ product }) {
         </nav>
 
         <div className="product__layout">
-          <div className="product__gallery">
+          <div className="product__gallery" data-reveal>
             <div className="product__main">
               <img src={product.gallery[image]} alt={product.name} />
             </div>
@@ -92,7 +92,7 @@ function Product({ product }) {
             </div>
           </div>
 
-          <div className="product__info">
+          <div className="product__info" data-reveal>
             <p className="eyebrow product__eyebrow">
               {product.number} — {product.type}
             </p>

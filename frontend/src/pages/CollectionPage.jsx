@@ -8,7 +8,7 @@ const GRID_ROWS = 3;
 
 export function ProductCard({ product }) {
   return (
-    <Link to={`/collection/${product.slug}`} className="product-card">
+    <Link to={`/collection/${product.slug}`} className="product-card" data-reveal>
       <div className="product-card__media">
         <img src={product.image} alt={product.card_title} loading="lazy" />
       </div>
@@ -35,10 +35,10 @@ export default function CollectionPage() {
   return (
     <section className="page-top collection-page">
       <div className="container collection-page__head">
-        <RichText as="h1" className="display collection-page__title" text={collectionPage.heading} />
-        <p className="lead collection-page__sub">{collectionPage.subtitle}</p>
+        <RichText as="h1" className="display collection-page__title" data-reveal text={collectionPage.heading} />
+        <p className="lead collection-page__sub" data-reveal>{collectionPage.subtitle}</p>
 
-        <div className="tabs" role="tablist" aria-label="Filter collections">
+        <div className="tabs" data-reveal role="tablist" aria-label="Filter collections">
           {categories.map((c) => (
             <button
               key={c.slug}

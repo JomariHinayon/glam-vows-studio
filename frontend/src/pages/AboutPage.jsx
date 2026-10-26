@@ -13,13 +13,14 @@ export default function AboutPage() {
       {/* Hero */}
       <section
         className="about-hero"
+        data-parallax
         style={{ backgroundImage: `url(${data.hero_image})` }}
       >
         <div className="about-hero__overlay" />
         <div className="container about-hero__content">
-          <RichText as="h1" className="display about-hero__heading" text={data.hero_heading} />
-          <p className="about-hero__subtitle">{data.hero_subtitle}</p>
-          <Link to={data.hero_cta_url} className="link-underline link-underline--light">
+          <RichText as="h1" className="display about-hero__heading" data-reveal text={data.hero_heading} />
+          <p className="about-hero__subtitle" data-reveal>{data.hero_subtitle}</p>
+          <Link to={data.hero_cta_url} className="link-underline link-underline--light" data-reveal>
             {data.hero_cta_label}
           </Link>
         </div>
@@ -31,8 +32,8 @@ export default function AboutPage() {
       {/* Founder */}
       <section className="founder">
         <div className="container founder__inner">
-          <img className="founder__img" src={data.founder_image} alt="Gladys, founder of Glam Vows Studio" />
-          <div className="founder__text">
+          <img className="founder__img" data-reveal src={data.founder_image} alt="Gladys, founder of Glam Vows Studio" />
+          <div className="founder__text" data-reveal>
             <p className="eyebrow">{data.founder_eyebrow}</p>
             <RichText as="h2" className="display founder__heading" text={data.founder_heading} />
             {data.founder_paragraphs.map((p, i) => (
@@ -50,13 +51,13 @@ export default function AboutPage() {
       {/* Values */}
       <section className="values">
         <div className="container">
-          <div className="values__head">
+          <div className="values__head" data-reveal>
             <p className="eyebrow">{data.values_eyebrow}</p>
             <RichText as="h2" className="display values__heading" text={data.values_heading} />
           </div>
           <div className="values__grid">
             {data.values.map((v) => (
-              <div key={v.title} className="value">
+              <div key={v.title} className="value" data-reveal>
                 <ValueIcon name={v.icon} className="value__icon" />
                 <h3 className="value__title">{v.title}</h3>
                 <p className="value__text">{v.text}</p>

@@ -22,6 +22,9 @@
   /* Figma frame is 1440 wide with 64px side padding */
   --maxw: 1440px;
   --gutter: 64px;
+
+  /* Motion, from the Studio Blanche reference (see components/Motion.jsx) */
+  --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 * {
@@ -154,6 +157,48 @@ em {
   font-style: italic;
   color: var(--muted);
   font-size: 22px;
+}
+
+/* Scroll reveal: hidden until Motion.jsx marks it data-revealed */
+.motion-ready [data-reveal] {
+  opacity: 0.001;
+}
+.motion-ready [data-reveal][data-revealed] {
+  opacity: 1;
+  animation: reveal-up 1s ease var(--reveal-delay, 0ms) backwards;
+}
+.motion-ready [data-reveal="fade"][data-revealed] {
+  animation-name: reveal-fade;
+}
+@keyframes reveal-fade {
+  from {
+    opacity: 0.001;
+  }
+}
+@keyframes reveal-up {
+  from {
+    opacity: 0.001;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Parallax: a taller copy of the element's background, moved by Motion.jsx */
+[data-parallax] {
+  overflow: hidden;
+  isolation: isolate;
+}
+[data-parallax]::before {
+  content: "";
+  position: absolute;
+  inset: -100px 0;
+  z-index: -1;
+  background: inherit;
+  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  will-change: transform;
 }
 
 @media (max-width: 860px) {

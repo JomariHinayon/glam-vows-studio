@@ -10,7 +10,7 @@ export default function Collections({ data }) {
   return (
     <section id="collections" className="section collections">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head" data-reveal>
           <p className="eyebrow">{data.collections_eyebrow}</p>
           <RichText as="h2" className="display section-head__title" text={data.collections_heading} />
           <p className="lead section-head__sub">{data.collections_subtitle}</p>
@@ -18,7 +18,7 @@ export default function Collections({ data }) {
 
         <div className="collections__grid">
           {items.map((item) => (
-            <Link key={item.title} to={item.link} className="collection-card">
+            <Link key={item.title} to={item.link} className="collection-card" data-reveal>
               <div className="collection-card__media">
                 <img src={item.image} alt={item.title} />
               </div>
@@ -27,7 +27,7 @@ export default function Collections({ data }) {
           ))}
         </div>
 
-        <div className="collections__controls">
+        <div className="collections__controls" data-reveal>
           <div className="dots">
             {[0, 1, 2, 3, 4, 5].map((d) => (
               <span
@@ -55,7 +55,7 @@ export default function Collections({ data }) {
           </div>
         </div>
 
-        <div className="collections__cta">
+        <div className="collections__cta" data-reveal>
           <Link to="/collection" className="btn btn--solid">
             {data.collections_cta_label}
           </Link>
